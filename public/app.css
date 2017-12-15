@@ -1,0 +1,13 @@
+.uk-tile,
+.uk-button,
+.uk-textarea {
+   border-radius: 10px;
+}
+
+.success {
+   color: Green;
+}
+
+.fail{
+   color: red;
+}

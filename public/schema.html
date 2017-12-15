@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Schema</title>
+</head>
+
+<body>
+   <div class="uk-section">
+      <div class="uk-container">
+         <div uk-grid>
+            <h3>
+               <a href="index.html">Go Home</a>
+            </h3>
+         </div>
+         <div uk-grid>
+            <div class="uk-width-1-2">
+               <code>
+                   { type: "object", properties: { smaller: { type: "number" }, larger: { type: "number" } }, required: ["smaller", "larger"]
+                  }
+               </code>
+               <br>
+               <p>NOTE: The keys in the input must be enclosed in "" else it wont work.</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
