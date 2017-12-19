@@ -9,13 +9,14 @@ function error(label, message) {
 }
 
 function applyValue(schema, key, defaultValue) {
-	schema[key] = either(schema[key], defaultValue);
+   schema[key] = either(schema[key], defaultValue);
 }
 
 function setValueForSchema(schema) {
-	if (schema.done) {
-		return schema;
-	}
+   if (schema.done) {
+      return schema;
+   }
+
 
 	switch (schema.type) {
 		case "number":
@@ -98,40 +99,36 @@ function validateNumber(label, value, schema) {
 	}
 
 	if (!(schema.min <= value && value <= schema.max)) {
-		error(label, "is not in the defined range");
+		error(label, "is not valid");
 	}
 
 	return value;
 }
 
 function validateString(label, value, schema) {
-	var isString, strLen;
+   var isString, strLen;
 
-	setValueForSchema(schema);
+   setValueForSchema(schema);
 
-	if (schema.isRequired && typeof value === "undefined") {
-		error(label, "is required");
-	}
+   if (schema.isRequired && typeof value === "undefined") {
+      error(label, "is required");
+   }
 
-	isString = _.isString(value);
+   isString = _.isString(value);
 
-	if (schema.convertByForce && !isString) {
-		value += "";
-	}
+   if (schema.convertByForce && !isString) {
+      value += "";
+   }
 
-	if (isString) {
-		strLen = value.length;
+   if (isString) {
+      strLen = value.length;
 
-		if (!(schema.min <= strLen && strLen <= schema.max)) {
-			error(label, "is not proper.");
-		}
+      if (!(schema.min <= strLen && strLen <= schema.max)) {
+         error(label, "is not proper.");
+      }
+   }
 
-		if (schema.pattern && !schema.pattern.test(value)) {
-			error(label, "is not match the defined pattern");
-		}
-	}
-
-	return value;
+   return value;
 }
 
 function validateObject(label, obj, schema) {
@@ -168,22 +165,22 @@ function validateObject(label, obj, schema) {
 }
 
 function select(label, value, schema) {
-	if (!schema) {
-		error(label, "not recognized.");
-	}
+   if (!schema) {
+      error(label, "not recognized.");
+   }
 
-	switch (schema.type) {
-		case "number":
-			return validateNumber(label, value, schema);
-		case "boolean":
-			return validateBoolean(label, value, schema);
-		case "string":
-			return validateString(label, value, schema);
-		case "object":
-			return validateObject(label, value, schema);
-		default:
-			error(label, "schema type is invalid");
-	}
+   switch (schema.type) {
+      case "number":
+         return validateNumber(label, value, schema);
+      case "boolean":
+         return validateBoolean(label, value, schema);
+      case "string":
+         return validateString(label, value, schema);
+      case "object":
+         return validateObject(label, value, schema);
+      default:
+         error(label, "schema type is invalid");
+   }
 }
 
 function validate(json, schema) {
